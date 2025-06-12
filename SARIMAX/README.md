@@ -107,6 +107,3 @@ print(summary_df)
 
 Contributions welcome! Please open issues or submit pull requests to improve functionality, add tests, or enhance documentation.
 
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
