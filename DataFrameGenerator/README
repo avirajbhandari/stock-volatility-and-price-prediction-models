@@ -1,1 +1,60 @@
+# Macro, Volatility, and Stock Data Compiler
 
+This Python script compiles macroeconomic indicators, stock volatility index (VIX), and a selected stock's historical prices into a single dataset for analysis. The compiled data is exported as a CSV file.
+
+## 📦 Data Sources
+- **FRED (Federal Reserve Economic Data)** via `pandas_datareader`
+  - GDP (`GDP`)
+  - Unemployment Rate (`UNRATE`)
+  - USD to Euro Exchange Rate (`DEXUSEU`)
+  - Federal Funds Rate (`FEDFUNDS`)
+- **Yahoo Finance** via `yfinance`
+  - Volatility Index (`^VIX`)
+  - Individual Stock Prices
+
+## 📅 Time Range
+- **Start Date**: January 1, 1990
+- **End Date**: January 1, 2022
+
+## 🧰 Requirements
+
+Install the required Python packages:
+```bash
+pip install pandas yfinance pandas_datareader
+```
+
+## 📝 Usage
+
+1. Open the script and change `EXPORT_PATH` to your desired save location.
+2. Run the script in a Python environment.
+3. Call the `save_data_for_ticker(ticker_symbol)` function with a valid stock ticker symbol. Example:
+
+```python
+save_data_for_ticker('AAPL')  # Saves AAPL data as CSV
+```
+
+4. The final CSV file will be saved to the specified `EXPORT_PATH`.
+
+## 📁 Output
+A CSV file named `{ticker_symbol}_combined.csv`, containing:
+- Date
+- GDP
+- Unemployment Rate
+- Exchange Rate (USD to Euro)
+- Federal Funds Rate
+- VIX
+- Stock Closing Price
+
+## 🛠 Example
+```python
+save_data_for_ticker('MSFT')
+```
+Output: `/home/student/suahmad/Richter_Final/Main_files/MSFT_combined.csv`
+
+## 📌 Notes
+- Missing values are forward-filled only for macro data. All rows with any remaining missing values are removed before export.
+- Ensure internet access when running the script for real-time data download.
+
+---
+
+Developed for data analysis projects involving macroeconomic indicators and stock market performance.
