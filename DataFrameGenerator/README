@@ -1,60 +1,108 @@
 # Macro, Volatility, and Stock Data Compiler
 
-This Python script compiles macroeconomic indicators, stock volatility index (VIX), and a selected stock's historical prices into a single dataset for analysis. The compiled data is exported as a CSV file.
+## Overview
 
-## 📦 Data Sources
-- **FRED (Federal Reserve Economic Data)** via `pandas_datareader`
-  - GDP (`GDP`)
-  - Unemployment Rate (`UNRATE`)
-  - USD to Euro Exchange Rate (`DEXUSEU`)
-  - Federal Funds Rate (`FEDFUNDS`)
-- **Yahoo Finance** via `yfinance`
-  - Volatility Index (`^VIX`)
-  - Individual Stock Prices
+This project fetches and compiles macroeconomic indicators, the stock market volatility index (VIX), and individual stock prices into a unified dataset. It enables data-driven analysis and modeling for forecasting or econometric research.
 
-## 📅 Time Range
-- **Start Date**: January 1, 1990
-- **End Date**: January 1, 2022
+## Features
 
-## 🧰 Requirements
+* Downloads GDP, unemployment rate, exchange rate, and federal funds rate from FRED
+* Fetches VIX (Volatility Index) from Yahoo Finance
+* Retrieves historical closing prices of specified stock tickers
+* Merges all data sources on date
+* Cleans dataset by forward-filling critical missing macro values and dropping rows with any remaining nulls
+* Saves final merged dataset to CSV for further use in predictive models or financial analysis
 
-Install the required Python packages:
+## Prerequisites
+
+* Python 3.8+
+* pandas
+* yfinance
+* pandas\_datareader
+
+## Installation
+
+Clone this repository and navigate into it:
+
+```bash
+git clone https://github.com/youruser/macro-stock-data-compiler.git
+cd macro-stock-data-compiler
+```
+
+Install required Python libraries:
+
 ```bash
 pip install pandas yfinance pandas_datareader
 ```
 
-## 📝 Usage
+## Project Structure
 
-1. Open the script and change `EXPORT_PATH` to your desired save location.
-2. Run the script in a Python environment.
-3. Call the `save_data_for_ticker(ticker_symbol)` function with a valid stock ticker symbol. Example:
-
-```python
-save_data_for_ticker('AAPL')  # Saves AAPL data as CSV
+```
+macro-stock-data-compiler/
+├── macro_stock_compiler.py     # Main script to fetch and compile data
+├── requirements.txt            # Required Python libraries
+├── export/                     # Output directory for combined data files
+│   └── AAPL_combined.csv       # Example of exported stock + macro + VIX dataset
+└── README.md                   # This documentation
 ```
 
-4. The final CSV file will be saved to the specified `EXPORT_PATH`.
+## Configuration
 
-## 📁 Output
-A CSV file named `{ticker_symbol}_combined.csv`, containing:
-- Date
-- GDP
-- Unemployment Rate
-- Exchange Rate (USD to Euro)
-- Federal Funds Rate
-- VIX
-- Stock Closing Price
+| Constant     | Description                                   | Default                                           |
+| ------------ | --------------------------------------------- | ------------------------------------------------- |
+| START\_DATE  | Start date for all data pulls                 | `1990-01-01`                                      |
+| END\_DATE    | End date for all data pulls                   | `2022-01-01`                                      |
+| EXPORT\_PATH | Directory path to save the final compiled CSV | `/home/student/suahmad/Richter_Final/Main_files/` |
 
-## 🛠 Example
+## Usage
+
+Ensure your environment is configured and then run:
+
+```python
+from macro_stock_compiler import save_data_for_ticker
+save_data_for_ticker('AAPL')  # Replace 'AAPL' with any valid stock ticker
+```
+
+The script will:
+
+1. Fetch macroeconomic, VIX, and stock data
+2. Merge and clean it
+3. Export a CSV to your defined EXPORT\_PATH
+
+## Output
+
+Each generated file will be named:
+
+```
+<TICKER>_combined.csv
+```
+
+Each CSV includes:
+
+* **DATE**
+* **GDP**
+* **Unemployment\_Rate**
+* **Exchange\_Rate** (USD to Euro)
+* **Federal\_Funds\_Rate**
+* **VIX**
+* **Close\_Price**
+
+### Example
+
 ```python
 save_data_for_ticker('MSFT')
+# Output file:
+# /home/student/suahmad/Richter_Final/Main_files/MSFT_combined.csv
 ```
-Output: `/home/student/suahmad/Richter_Final/Main_files/MSFT_combined.csv`
 
-## 📌 Notes
-- Missing values are forward-filled only for macro data. All rows with any remaining missing values are removed before export.
-- Ensure internet access when running the script for real-time data download.
+## Output Interpretation
 
----
+This dataset is ideal for:
 
-Developed for data analysis projects involving macroeconomic indicators and stock market performance.
+* Time series forecasting (e.g., LSTM, SARIMAX)
+* Regression modeling with macroeconomic exogenous variables
+* Volatility and price movement analysis
+
+## Contributing
+
+Contributions welcome! Submit pull requests to enhance features, support new indicators, or improve data handling.
