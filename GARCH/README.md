@@ -1,108 +1,94 @@
-Bitcoin Volatility Analysis Using GARCH Family Models
-Overview
-This project analyzes the volatility of Bitcoin (BTC-USD) returns using advanced time series models. It includes stationarity testing, visualization of log returns, and fitting multiple GARCH-family models to understand volatility clustering and dynamic risk. The project is built around academic econometrics concepts and supports model comparison via AIC/BIC.
+# GARCH-Based Bitcoin Volatility Modeling Pipeline
 
-Features
-Downloads daily Bitcoin prices from Yahoo Finance (yfinance)
+## Overview
 
-Computes and visualizes log returns
+This project implements a pipeline to model and forecast the volatility of Bitcoin (BTC-USD) daily returns using the GARCH(1,1) model. The notebook performs data preprocessing, log return calculation, diagnostic testing (ADF, ARCH effects, normality), and conditional volatility estimation. It is designed to support academic econometrics research, particularly volatility modeling in crypto markets.
 
-Performs stationarity tests (ADF, KPSS)
+## Features
 
-Tests for ARCH effects (Engle's ARCH test)
+* Downloads historical BTC-USD price data using `yfinance`
+* Computes daily log returns to stabilize variance
+* Performs descriptive statistics and normality tests (kurtosis, skewness, Jarque-Bera)
+* Conducts stationarity and ARCH-effect tests (ADF, KPSS, ARCH-LM)
+* Plots price series, log returns, ACF and PACF
+* Fits a GARCH(1,1) model using the `arch` package
+* Visualizes conditional volatility over time
+* Outputs summary statistics and model fit metrics
 
-Fits multiple GARCH-family models including:
+## Prerequisites
 
-GARCH (symmetric)
+* Python 3.8+
+* pandas  
+* numpy  
+* matplotlib  
+* scipy  
+* statsmodels  
+* arch  
+* yfinance
 
-EGARCH (asymmetric)
+## Installation
 
-TGARCH (threshold)
+1. Clone this repository:
 
-Visualizes conditional variance over time
+   ```bash
+   git clone https://github.com/youruser/garch-bitcoin-pipeline.git
+   cd garch-bitcoin-pipeline
+   ```
 
-Compares model fit using log-likelihood, AIC, and BIC
+2. Install dependencies:
 
-Prerequisites
-Python 3.8+
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-yfinance
+## Project Structure
 
-pandas
+```
+garch-bitcoin-pipeline/
+├── GARCH_bitcoin_new_.ipynb      # Main notebook with full pipeline
+├── bitcoin_2018_2022.csv         # Raw price data (optional export)
+├── bitcoin_log_returns_2018_2022.csv  # Preprocessed returns data
+├── requirements.txt              # Python dependencies
+└── README.md                     # This documentation
+```
 
-numpy
+## Configuration
 
-matplotlib
+You can modify the following settings directly in the notebook:
 
-scipy
+| Parameter         | Description                               | Default       |
+|------------------|-------------------------------------------|---------------|
+| `start_date`     | Beginning date for data download          | `'2020-01-01'`|
+| `end_date`       | Ending date for data download             | `'2025-01-01'`|
+| `p`, `q`         | GARCH model lag orders                    | `1, 1`        |
+| `ticker`         | Ticker symbol for asset                   | `'BTC-USD'`   |
 
-statsmodels
+## Usage
 
-arch
+1. Open the Jupyter Notebook:
 
-Installation
-Clone the repository:
+   ```bash
+   jupyter notebook GARCH_bitcoin_new_.ipynb
+   ```
 
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/bitcoin-volatility-garch.git
-cd bitcoin-volatility-garch
-Install dependencies:
+2. Run all cells to:
+   - Download BTC price data  
+   - Calculate and visualize log returns  
+   - Perform normality and stationarity tests  
+   - Fit a GARCH(1,1) model  
+   - Plot conditional volatility  
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Project Structure
-bash
-Copy
-Edit
-bitcoin-volatility-garch/
-├── GARCH_bitcoin_new_.ipynb     # Main notebook for data analysis and modeling
-├── bitcoin_log_returns_2018_2022.csv  # Exported log return data
-├── requirements.txt             # Python dependencies
-└── README.md                    # Project documentation
-Usage
-Open the notebook:
+## Output Interpretation
 
-bash
-Copy
-Edit
-jupyter notebook GARCH_bitcoin_new_.ipynb
-Run cells sequentially to:
+* **Log Return Plot:** Daily rate of return on BTC, capturing high-frequency price changes.
+* **ACF/PACF Plots:** Show autocorrelation structures useful for ARIMA/GARCH modeling.
+* **Diagnostic Test Results:** Confirm stationarity and presence of ARCH effects.
+* **Model Summary:** Reports coefficient estimates and diagnostics.
+* **Conditional Volatility Plot:** Illustrates time-varying volatility over the sample period.
 
-Fetch Bitcoin data from Yahoo Finance
+## Contributing
 
-Compute log returns
-
-Visualize trends and returns
-
-Run statistical tests for stationarity and heteroskedasticity
-
-Fit and compare multiple GARCH-family models
-
-Plot conditional volatility estimates
-
-Output Interpretation
-Log Return Plot: Visualizes daily return fluctuations
-
-ADF/KPSS Tests: Confirm data stationarity
-
-ARCH Test: Validates presence of volatility clustering
-
-Model Outputs: Includes estimated parameters and statistical significance
-
-Volatility Plot: Shows how risk evolves over time
-
-Model Ranking: Based on AIC/BIC for best fit comparison
-
-Research Context
-This work supports an undergraduate econometrics capstone project replicating and extending findings from:
-
-Katsiampa (2017): Volatility Estimation for Bitcoin: A Comparison of GARCH Models
-
-Gyamerah (2019): Modeling the Volatility of Bitcoin Returns Using GARCH Models
-
-Contributing
-Contributions are welcome! Feel free to open issues or pull requests for new models, features, or documentation improvements.
+Contributions welcome! You can help extend this project with:
+- Additional GARCH-family models (e.g., EGARCH, TGARCH)
+- Model comparison metrics (AIC, BIC, RMSE)
+- Backtesting volatility forecasts
