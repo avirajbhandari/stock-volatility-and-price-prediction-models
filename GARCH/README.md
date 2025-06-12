@@ -116,5 +116,3 @@ Pull requests are welcome! You can contribute by:
 - Adding interactive dashboards
 
 ---
-
-Let me know if you'd like this README saved into a file or paired with an auto-generated `requirements.txt`.
