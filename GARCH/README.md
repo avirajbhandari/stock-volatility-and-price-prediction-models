@@ -1,94 +1,98 @@
-# GARCH-Based Bitcoin Volatility Modeling Pipeline
+# Bitcoin Volatility Forecasting with GARCH and AR-GARCH Models
 
 ## Overview
 
-This project implements a pipeline to model and forecast the volatility of Bitcoin (BTC-USD) daily returns using the GARCH(1,1) model. The notebook performs data preprocessing, log return calculation, diagnostic testing (ADF, ARCH effects, normality), and conditional volatility estimation. It is designed to support academic econometrics research, particularly volatility modeling in crypto markets.
+This project builds a volatility modeling pipeline using daily Bitcoin (BTC-USD) prices. It applies both GARCH(1,1) and AR(1)-GARCH(1,1) models to estimate and visualize conditional volatility. The notebook includes data preprocessing, statistical diagnostics (ADF, JB, ARCH test), and AIC/BIC comparison for model evaluation.
 
 ## Features
 
-* Downloads historical BTC-USD price data using `yfinance`
-* Computes daily log returns to stabilize variance
-* Performs descriptive statistics and normality tests (kurtosis, skewness, Jarque-Bera)
-* Conducts stationarity and ARCH-effect tests (ADF, KPSS, ARCH-LM)
-* Plots price series, log returns, ACF and PACF
-* Fits a GARCH(1,1) model using the `arch` package
-* Visualizes conditional volatility over time
-* Outputs summary statistics and model fit metrics
+- Downloads BTC-USD data using `yfinance`
+- Computes daily log returns from price data
+- Plots historical prices and return series
+- Conducts normality and stationarity tests (Jarque-Bera, ADF, KPSS)
+- Tests for heteroskedasticity using ARCH-LM
+- Visualizes ACF and PACF of log returns
+- Fits both GARCH(1,1) and AR(1)-GARCH(1,1) models
+- Plots conditional volatility over time
+- Computes raw and per-observation AIC/BIC
 
 ## Prerequisites
 
-* Python 3.8+
-* pandas  
-* numpy  
-* matplotlib  
-* scipy  
-* statsmodels  
-* arch  
-* yfinance
+- Python 3.8+
+- pandas  
+- numpy  
+- matplotlib  
+- scipy  
+- statsmodels  
+- arch  
+- yfinance  
 
 ## Installation
 
-1. Clone this repository:
-
-   ```bash
-   git clone https://github.com/youruser/garch-bitcoin-pipeline.git
-   cd garch-bitcoin-pipeline
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+git clone https://github.com/youruser/bitcoin-garch-volatility.git
+cd bitcoin-garch-volatility
+pip install -r requirements.txt
+```
 
 ## Project Structure
 
 ```
-garch-bitcoin-pipeline/
-├── GARCH_bitcoin_new_.ipynb      # Main notebook with full pipeline
+bitcoin-garch-volatility/
+├── GARCH_bitcoin_new_.ipynb      # Main notebook with modeling pipeline
 ├── bitcoin_2018_2022.csv         # Raw price data (optional export)
-├── bitcoin_log_returns_2018_2022.csv  # Preprocessed returns data
+├── bitcoin_log_returns_2018_2022.csv  # Preprocessed log returns
 ├── requirements.txt              # Python dependencies
-└── README.md                     # This documentation
+└── README.md                     # Project documentation
 ```
-
-## Configuration
-
-You can modify the following settings directly in the notebook:
-
-| Parameter         | Description                               | Default       |
-|------------------|-------------------------------------------|---------------|
-| `start_date`     | Beginning date for data download          | `'2020-01-01'`|
-| `end_date`       | Ending date for data download             | `'2025-01-01'`|
-| `p`, `q`         | GARCH model lag orders                    | `1, 1`        |
-| `ticker`         | Ticker symbol for asset                   | `'BTC-USD'`   |
 
 ## Usage
 
-1. Open the Jupyter Notebook:
+Open the notebook:
 
-   ```bash
-   jupyter notebook GARCH_bitcoin_new_.ipynb
-   ```
+```bash
+jupyter notebook GARCH_bitcoin_new_.ipynb
+```
 
-2. Run all cells to:
-   - Download BTC price data  
-   - Calculate and visualize log returns  
-   - Perform normality and stationarity tests  
-   - Fit a GARCH(1,1) model  
-   - Plot conditional volatility  
+Run each cell to:
+
+1. Fetch historical BTC-USD price data
+2. Calculate log returns and visualize price/return trends
+3. Perform summary stats and diagnostics (JB, ARCH, ADF, KPSS)
+4. Fit GARCH(1,1) and AR(1)-GARCH(1,1) models
+5. Visualize conditional volatility and compare model AIC/BIC
+
+## Configuration
+
+The following settings can be adjusted in the notebook:
+
+| Parameter         | Description                                 | Default         |
+|------------------|---------------------------------------------|-----------------|
+| `ticker`         | Ticker to download via yfinance             | `'BTC-USD'`     |
+| `start_date`     | Start date for data download                | `'2020-01-01'`  |
+| `end_date`       | End date for data download                  | `'2025-01-01'`  |
+| `p, q`           | GARCH lag parameters                        | `p=1, q=1`      |
+| `mean model`     | Type of mean model (`None`, `AR`)           | `'AR'` in AR-GARCH|
 
 ## Output Interpretation
 
-* **Log Return Plot:** Daily rate of return on BTC, capturing high-frequency price changes.
-* **ACF/PACF Plots:** Show autocorrelation structures useful for ARIMA/GARCH modeling.
-* **Diagnostic Test Results:** Confirm stationarity and presence of ARCH effects.
-* **Model Summary:** Reports coefficient estimates and diagnostics.
-* **Conditional Volatility Plot:** Illustrates time-varying volatility over the sample period.
+- **Price and Return Plots**: Visual trend and volatility of BTC
+- **Statistical Tests**:
+  - **Jarque-Bera**: Tests normality of returns
+  - **ADF / KPSS**: Test for stationarity
+  - **ARCH-LM**: Tests for conditional heteroskedasticity
+- **ACF/PACF**: Checks serial correlation patterns
+- **Model Summary**: Includes coefficient estimates and significance
+- **Volatility Plot**: Shows time-varying volatility estimated by GARCH
+- **AIC/BIC**: Used for model comparison (raw and per observation)
 
 ## Contributing
 
-Contributions welcome! You can help extend this project with:
-- Additional GARCH-family models (e.g., EGARCH, TGARCH)
-- Model comparison metrics (AIC, BIC, RMSE)
-- Backtesting volatility forecasts
+Contributions are welcome! Add enhancements like:
+- EGARCH / TGARCH comparisons
+- Out-of-sample forecast evaluation
+- Interactive dashboards with Plotly or Streamlit
+
+---
+
+Let me know if you'd like a `requirements.txt` auto-generated or want to publish this as a research repo.
