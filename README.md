@@ -42,43 +42,79 @@ The project leverages various forecasting models and machine-learning techniques
 ## Results and Progress:
 As of now, the team has developed the core DataFrame generator and is experimenting with various forecasting models. Preliminary tests show promising results for volatility prediction with GAARCH, and Neural Networks are being fine-tuned for more accurate price movement predictions.
 
+## How to Share This Repository
+
+This repository can be shared in several ways depending on your needs:
+
+### Quick Sharing
+- **Repository URL**: `https://github.com/avirajbhandari/stock-volatility-and-price-prediction-models`
+- **Clone command**: `git clone https://github.com/avirajbhandari/stock-volatility-and-price-prediction-models.git`
+
+### For Collaboration
+- See our [Contributing Guidelines](CONTRIBUTING.md) for details on how to contribute
+- Fork the repository and submit pull requests for improvements
+- Open issues to discuss new features or report bugs
+
+### For Educational Use
+- Individual notebooks can be shared for specific learning objectives
+- The repository includes comprehensive documentation in each model folder
+- View our [Project Presentation](Presentation/Presentation_link.md) for an overview
+
+### For Professional Use
+- Cite this repository in academic papers or professional presentations
+- Reference the contributors and methodology described in this README
+- See our [Sharing Guide](SHARING.md) for detailed instructions on different sharing scenarios
+
+For comprehensive guidance on sharing this repository, see [SHARING.md](SHARING.md).
+
 ## Installation:
 
 ### Prerequisites:
-Make sure you have the following Python libraries installed:
-- pandas
-- numpy
-- tensorflow
-- keras
-- arch
-- yfinance
-- matplotlib
-- scipy
+- Python 3.8 or higher
+- Git (for cloning the repository)
 
 ### Setup Instructions:
 1. Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/stock-price-prediction.git
+   git clone https://github.com/avirajbhandari/stock-volatility-and-price-prediction-models.git
+   ```
 
-2. Navigate to the project directory
-    ```bash
-     cd stock-price-prediction
-    
+2. Navigate to the project directory:
+   ```bash
+   cd stock-volatility-and-price-prediction-models
+   ```
+   
 3. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
+   ```
 
-  ## **Repository Structure**
+4. Launch Jupyter Notebook to explore the models:
+   ```bash
+   jupyter notebook
+   ```
+
+## **Repository Structure**
 ```plaintext
-├── data/                  # Raw and processed datasets
-├── models/                 # Scripts for different prediction models
-│   ├── gaarch_model.py     # GAARCH model for volatility prediction
-│   ├── neural_network_model.py  # Neural Network model
-│   └── lstm_model.py      # LSTM model (under development)
-├── data_frame_generator.py # Script to generate dynamic data frame for any ticker
-├── results/               # Generated results and plots
-├── visuals/               # Visualizations (charts and graphs)
+├── DataFrameGenerator/      # Dynamic data frame generator for any ticker
+│   ├── DataFrameGenerator.ipynb    # Main notebook for data generation
+│   └── README.md           # Data generator documentation
+├── GARCH/                  # GARCH volatility modeling
+│   ├── GARCH_bitcoin.ipynb # GARCH model implementation
+│   └── README.md           # GARCH model documentation
+├── LSTM/                   # LSTM neural network models
+│   ├── lstm.ipynb          # LSTM model implementation
+│   └── README.md           # LSTM model documentation
+├── SARIMAX/               # SARIMAX time series models
+│   ├── SARIMAX.ipynb      # SARIMAX model implementation
+│   └── README.md          # SARIMAX model documentation
+├── stock-price-prediction/ # Additional prediction models
+├── Papers/                # Research papers and references
+├── Presentation/          # Project presentations
+│   └── Presentation_link.md # Link to project presentation
 ├── README.md              # Project documentation
+├── SHARING.md             # Guide on how to share this repository
+├── CONTRIBUTING.md        # Contribution guidelines
 ├── requirements.txt       # Python dependencies
 └── LICENSE                # Project license (MIT)
 ```
